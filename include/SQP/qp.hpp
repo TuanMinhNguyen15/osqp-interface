@@ -38,9 +38,9 @@ class QP {
             char type; 
             std::set<char> avail_types = {'P','q','l','A','u'};
             
-            std::vector<int> var_indices,constr_indices;  // Book Kepping
             std::vector<c_float> data;
-            std::vector<int> target_indices;  // Important!
+            std::vector<std::vector<int>> var_indices,constr_indices;  // Book Kepping
+            std::vector<std::vector<int>> target_indices;  // Important!
             c_float *target;
         };
 

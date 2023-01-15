@@ -21,17 +21,17 @@ int main(){
     }
     std::cout << std::endl;
 
-    std::cout << "var_indices: ";
-    for (auto var_index : p.var_indices){
-        std::cout << var_index << " , ";
-    }
-    std::cout << std::endl;
+    // std::cout << "var_indices: ";
+    // for (auto var_index : p.var_indices){
+    //     std::cout << var_index << " , ";
+    // }
+    // std::cout << std::endl;
 
-    std::cout << "constr_indices: ";
-    for (auto constr_index : p.constr_indices){
-        std::cout << constr_index << " , ";
-    }
-    std::cout << std::endl;
+    // std::cout << "constr_indices: ";
+    // for (auto constr_index : p.constr_indices){
+    //     std::cout << constr_index << " , ";
+    // }
+    // std::cout << std::endl;
 
     p.data[0] = 11;
     p.data[1] = 22;
@@ -44,17 +44,17 @@ int main(){
     std::cout << std::endl;
 
 
-    std::cout << "var_indices: ";
-    for (auto var_index : p.var_indices){
-        std::cout << var_index << " , ";
-    }
-    std::cout << std::endl;
+    // std::cout << "var_indices: ";
+    // for (auto var_index : p.var_indices){
+    //     std::cout << var_index << " , ";
+    // }
+    // std::cout << std::endl;
 
-    std::cout << "constr_indices: ";
-    for (auto constr_index : p.constr_indices){
-        std::cout << constr_index << " , ";
-    }
-    std::cout << std::endl;
+    // std::cout << "constr_indices: ";
+    // for (auto constr_index : p.constr_indices){
+    //     std::cout << constr_index << " , ";
+    // }
+    // std::cout << std::endl;
 
     
     return 0;

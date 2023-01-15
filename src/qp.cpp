@@ -19,9 +19,9 @@ ROW QP::Variable::operator[] (int index){
 QP::Parameter::Parameter(int size, char type){
      this->size = size;
      data.resize(size,0);
-     target_indices.resize(size,-1);
-     var_indices.resize(size,-1);
-     constr_indices.resize(size,-1);
+     target_indices.resize(size);
+     var_indices.resize(size);
+     constr_indices.resize(size);
 
      auto found = avail_types.find(type);
      if (found != avail_types.end()){
@@ -40,7 +40,9 @@ void QP::Parameter::update(std::vector<c_float> data_new){
 
           // TODO: update target
           for (auto i = 0; i < size; i++){
-               target[target_indices[i]] = data[i];
+               for (auto target_index : target_indices[i]){
+                    target[target_index] = data[i];
+               }
           }
      }
      else{
@@ -65,8 +67,8 @@ ROW operator * (PARAM_DUMMY param_dummy, ROW &row){
           auto param_ptr = static_cast<QP::Parameter*>(param_dummy.param_ptr);
 
           entry_ptr->second = param_dummy.param_data;
-          param_ptr->var_indices[param_dummy.index] = entry_ptr->first;
-          param_ptr->constr_indices[param_dummy.index] = param_ptr->qp->get_num_constr();
+          param_ptr->var_indices[param_dummy.index].push_back(entry_ptr->first);
+          param_ptr->constr_indices[param_dummy.index].push_back(param_ptr->qp->get_num_constr());
           
      }
      else{
@@ -111,7 +113,7 @@ void QP::add_constraint(PARAM_DUMMY lb, ROW row, c_float ub){
      u_vec.push_back(ub);
 
      QP::Parameter *param_ptr = static_cast<QP::Parameter*>(lb.param_ptr);
-     param_ptr->constr_indices[lb.index] = num_constr;
+     param_ptr->constr_indices[lb.index].push_back(num_constr);
 
      num_constr++;
 }
@@ -122,7 +124,7 @@ void QP::add_constraint(c_float lb, ROW row, PARAM_DUMMY ub){
      u_vec.push_back(ub.param_data);
 
      QP::Parameter *param_ptr = static_cast<QP::Parameter*>(ub.param_ptr);
-     param_ptr->constr_indices[ub.index] = num_constr;
+     param_ptr->constr_indices[ub.index].push_back(num_constr);
 
      num_constr++;
 }
@@ -133,10 +135,10 @@ void QP::add_constraint(PARAM_DUMMY lb, ROW row, PARAM_DUMMY ub){
      u_vec.push_back(ub.param_data);
 
      QP::Parameter *lb_param_ptr = static_cast<QP::Parameter*>(lb.param_ptr);
-     lb_param_ptr->constr_indices[lb.index] = num_constr;
+     lb_param_ptr->constr_indices[lb.index].push_back(num_constr);
 
      QP::Parameter *ub_param_ptr = static_cast<QP::Parameter*>(ub.param_ptr);
-     ub_param_ptr->constr_indices[ub.index] = num_constr;
+     ub_param_ptr->constr_indices[ub.index].push_back(num_constr);
 
      num_constr++;
 }
@@ -170,7 +172,9 @@ void QP::formulate(){
           case 'A':
                param->target = A_x;
                for (auto i = 0; i < param->size; i++){
-                    param->target_indices[i] = A_p[param->var_indices[i]] + param->constr_indices[i];
+                    for (auto j = 0; j < param->var_indices[i].size() ; j++){
+                         param->target_indices[i].push_back(A_p[param->var_indices[i][j]] + param->constr_indices[i][j]);
+                    }
                }
                break;
 
