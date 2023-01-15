@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{57E7A31B-1E30-3EDF-BAB9-793106FAC499}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\SequentialQuadraticProgram\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/SequentialQuadraticProgram/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+E:\CMake\bin\cmake.exe -SD:/SequentialQuadraticProgram -BD:/SequentialQuadraticProgram/build --check-stamp-file D:/SequentialQuadraticProgram/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCXXCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeRCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeSystem.cmake;D:\osqp\install\lib\cmake\osqp\osqp-config.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets-debug.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/SequentialQuadraticProgram/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+E:\CMake\bin\cmake.exe -SD:/SequentialQuadraticProgram -BD:/SequentialQuadraticProgram/build --check-stamp-file D:/SequentialQuadraticProgram/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCXXCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeRCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeSystem.cmake;D:\osqp\install\lib\cmake\osqp\osqp-config.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets-debug.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/SequentialQuadraticProgram/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+E:\CMake\bin\cmake.exe -SD:/SequentialQuadraticProgram -BD:/SequentialQuadraticProgram/build --check-stamp-file D:/SequentialQuadraticProgram/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCXXCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeRCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeSystem.cmake;D:\osqp\install\lib\cmake\osqp\osqp-config.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets-debug.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/SequentialQuadraticProgram/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+E:\CMake\bin\cmake.exe -SD:/SequentialQuadraticProgram -BD:/SequentialQuadraticProgram/build --check-stamp-file D:/SequentialQuadraticProgram/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeCXXCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeRCCompiler.cmake;D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\CMakeSystem.cmake;D:\osqp\install\lib\cmake\osqp\osqp-config.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets-debug.cmake;D:\osqp\install\lib\cmake\osqp\osqp-targets.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCXXInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeCommonLanguageInclude.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeGenericSystem.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeInitializeConfigs.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeLanguageInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeRCInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInformation.cmake;E:\CMake\share\cmake-3.24\Modules\CMakeSystemSpecificInitialize.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\CMakeCommonCompilerMacros.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Compiler\MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-C.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC-CXX.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows-MSVC.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\Windows.cmake;E:\CMake\share\cmake-3.24\Modules\Platform\WindowsPaths.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\SequentialQuadraticProgram\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\SequentialQuadraticProgram\build\ZERO_CHECK.vcxproj">
+      <Project>{F690DFFF-858E-3F8E-B9CE-3383CF96119E}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\SequentialQuadraticProgram\build\csc_gen_demo.vcxproj">
+      <Project>{20F0004B-547B-3E9E-8D9A-150988B1B409}</Project>
+      <Name>csc_gen_demo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\SequentialQuadraticProgram\build\param_demo.vcxproj">
+      <Project>{B9BFD848-9A27-3542-81CC-954A2C1F9882}</Project>
+      <Name>param_demo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\SequentialQuadraticProgram\build\qp_demo.vcxproj">
+      <Project>{22F4488C-F0FC-39B1-B88E-420D1CC30228}</Project>
+      <Name>qp_demo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\SequentialQuadraticProgram\build\row_demo.vcxproj">
+      <Project>{39F320AA-5432-3344-980F-ADA3322482BC}</Project>
+      <Name>row_demo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\SequentialQuadraticProgram\build\sqp.vcxproj">
+      <Project>{7B3A5870-2610-3BB8-BEC0-4381FB305030}</Project>
+      <Name>sqp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\SequentialQuadraticProgram\build\test.vcxproj">
+      <Project>{79E52543-68C6-34A4-8824-48D7BFF8A92E}</Project>
+      <Name>test</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
