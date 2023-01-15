@@ -12,7 +12,7 @@ int main(){
     qp_params.params = {&p,&lb,&ub};
     QP qp(qp_params);
 
-    qp.add_constraint(99,  p[1]*x[0] + p[1]*x[1] + p[2]*x[2], 99);
+    qp.add_constraint(99,  p[1]*x[0] + p[1]*x[1] + p[2]*x[2], ub[0]);
     qp.add_constraint(100, 20*x[0] + p[1]*x[1] + p[2]*x[2], ub[0]);
     
     qp.formulate();
