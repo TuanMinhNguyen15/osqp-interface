@@ -47,6 +47,8 @@ void CSC_GEN::csc_generate(c_float *&M_x, c_int &M_nnz, c_int *&M_i, c_int *&M_p
     M_nnz = csc_nnz;
     M_i   = &csc_i[0];
     M_p   = &csc_p[0];
+
+    csc_x_original = csc_x;
 }
 
 void CSC_GEN::print_matrix(){
@@ -69,6 +71,10 @@ void CSC_GEN::print_matrix(){
         std::cout << csc_p[i] << " ";
     }
     std::cout << std::endl;
+}
+
+void CSC_GEN::restore(){
+    csc_x = csc_x_original;
 }
 
 
@@ -109,9 +115,15 @@ ROW operator - (ROW row_a, ROW row_b){
 
 ROW operator * (float coeff, ROW row){
 
-    for (auto &row_entry : row.entries){
-        row_entry.second *= coeff;
+    if (row.entries.size() == 1){
+        for (auto &row_entry : row.entries){
+            row_entry.second = coeff;   // here
+        }
     }
+    else{
+        std::cerr << "One element pls!\n";
+    }
+    
 
     return row;
 }

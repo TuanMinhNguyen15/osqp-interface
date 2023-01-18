@@ -3,14 +3,37 @@
 #include "sqp/util.hpp"
 #include <iostream>
 #include <set>
+#include <utility>
+
+enum class TYPE {LOWER_BOUND, 
+                 UPPER_BOUND, 
+                 CONSTRAINT, 
+                 QUADRATIC_COST, 
+                 LINEAR_COST, 
+                 UNDEFINED};
 
 struct PARAM_DUMMY{
-    c_float param_data;
     void* param_ptr;
     int index;
+    int var_index;
 };
 
 ROW operator * (PARAM_DUMMY param_dummy, ROW &row);
+
+struct Expression{
+    ROW linear_terms;
+    // quadratic terms
+
+    std::vector<PARAM_DUMMY> param_dummies;
+
+    Expression();
+};
+
+Expression operator + (Expression exp1, Expression exp2);
+Expression operator - (Expression exp1, Expression exp2);
+Expression operator * (float coef, Expression exp);
+Expression operator * (Expression exp1, Expression exp2); // quadraic term!!!
+Expression operator * (PARAM_DUMMY param_dummy, Expression &exp);
 
 
 class QP {
@@ -19,7 +42,7 @@ class QP {
             // public
             Variable(int size);
             std::vector<c_float> sol;
-            ROW operator [] (int index);
+            Expression operator [] (int index);
 
             // private
             int col_start = -1;
@@ -28,8 +51,8 @@ class QP {
         
         struct Parameter{
             // public
-            Parameter(int size, char type);
-            void update(std::vector<c_float> data_new);
+            Parameter(int size);
+            void update_data(std::vector<c_float> data_new);
             PARAM_DUMMY operator [] (int index);
 
             // private
@@ -40,8 +63,11 @@ class QP {
             
             std::vector<c_float> data;
             std::vector<std::vector<int>> var_indices,constr_indices;  // Book Kepping
-            std::vector<std::vector<int>> target_indices;  // Important!
-            c_float *target;
+            std::vector<std::vector<TYPE>> types;
+            // std::vector<std::vector<int>> target_indices;  // Important!
+            // c_float *target;
+
+            std::vector< std::vector< std::pair<c_float*,int>>> targets;
         };
 
         struct QP_Params{
@@ -51,10 +77,10 @@ class QP {
 
         QP(QP_Params qp_params);
 
-        void add_constraint(c_float     lb, ROW row, c_float     ub);
-        void add_constraint(PARAM_DUMMY lb, ROW row, c_float     ub);
-        void add_constraint(c_float     lb, ROW row, PARAM_DUMMY ub);
-        void add_constraint(PARAM_DUMMY lb, ROW row, PARAM_DUMMY ub);
+        void add_constraint(c_float     lb, Expression exp, c_float     ub);
+        void add_constraint(PARAM_DUMMY lb, Expression exp, c_float     ub);
+        void add_constraint(c_float     lb, Expression exp, PARAM_DUMMY ub);
+        void add_constraint(PARAM_DUMMY lb, Expression exp, PARAM_DUMMY ub);
         void formulate();
         void update();
 
@@ -76,6 +102,7 @@ class QP {
         CSC_GEN A_matrix;
 
         std::vector<c_float> l_vec,u_vec;
+        std::vector<c_float> l_original,u_original;
 
         // P matrix
         c_float *P_x;

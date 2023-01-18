@@ -3,23 +3,19 @@
 
 int main(){
     QP::Variable x(3);
-    QP::Parameter p(3,'A');
-    QP::Parameter lb(1,'l');
-    QP::Parameter ub(1,'u');
+    QP::Parameter p(3);
 
     QP::QP_Params qp_params;
     qp_params.vars = {&x};
-    qp_params.params = {&p,&lb,&ub};
+    qp_params.params = {&p};
     QP qp(qp_params);
 
-    qp.add_constraint(99,  p[1]*x[0] + p[1]*x[1] + p[2]*x[2], ub[0]);
-    qp.add_constraint(100, 20*x[0] + p[1]*x[1] + p[2]*x[2], ub[0]);
-    
+    qp.add_constraint(0 , x[0] + x[1] + x[2] , 1);
+    qp.add_constraint(p[0], p[0]*x[0] - p[1]*x[1] + p[2]*x[2], p[2]);
     qp.formulate();
 
-    p.update({-11,-22,-33});
-    lb.update({-222});
-    ub.update({-444});
+    p.update_data({-11,-22,-33});
     qp.update();
+
     
 }

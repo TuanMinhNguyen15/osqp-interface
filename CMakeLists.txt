@@ -15,14 +15,14 @@ target_include_directories(sqp PUBLIC
                                $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}/sqp>)
 
 
-add_executable(csc_gen_demo ./examples/csc_gen_demo.cpp)
-target_link_libraries(csc_gen_demo PRIVATE sqp)
+# add_executable(csc_gen_demo ./examples/csc_gen_demo.cpp)
+# target_link_libraries(csc_gen_demo PRIVATE sqp)
 
 add_executable(qp_demo ./examples/qp_demo.cpp)
 target_link_libraries(qp_demo PRIVATE sqp)
 
-add_executable(row_demo ./examples/row_demo.cpp)
-target_link_libraries(row_demo PRIVATE sqp)
+# add_executable(row_demo ./examples/row_demo.cpp)
+# target_link_libraries(row_demo PRIVATE sqp)
 
-add_executable(param_demo ./examples/param_demo.cpp)
-target_link_libraries(param_demo PRIVATE sqp)
+# add_executable(param_demo ./examples/param_demo.cpp)
+# target_link_libraries(param_demo PRIVATE sqp)
