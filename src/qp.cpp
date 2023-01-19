@@ -44,7 +44,7 @@ PARAM_DUMMY QP::Parameter::operator[] (int index){
   
 }
 
-ROW operator * (PARAM_DUMMY param_dummy, ROW &row){
+ROW operator * (PARAM_DUMMY param_dummy, ROW row){
      // TODO: * operator only works on type 'A' parameters
      if (row.entries.size() == 1){
           auto entry_ptr = row.entries.begin(); 
@@ -72,7 +72,7 @@ PARAM_DUMMY PARAM_DUMMY::operator-(){
      return param_dummy;
 }
 
-PARAM_DUMMY operator * (c_float coef, PARAM_DUMMY &param_dummy){
+PARAM_DUMMY operator * (c_float coef, PARAM_DUMMY param_dummy){
      param_dummy.scale = coef;
      
      return param_dummy;
@@ -140,7 +140,7 @@ Expression operator * (float coef, Expression exp){
      return exp_out;
 }
 
-Expression operator * (PARAM_DUMMY param_dummy, Expression &exp){
+Expression operator * (PARAM_DUMMY param_dummy, Expression exp){
 
      auto entry_ptr = exp.linear_terms.entries.begin();  
      auto param_ptr = static_cast<QP::Parameter*>(param_dummy.param_ptr);

@@ -7,37 +7,20 @@ int main(){
     c_int *M_i;
     c_int *M_p;
 
-    size_t num_cols = 3;
+    size_t num_cols = 2;
     CSC_GEN M(num_cols);
-    ROW row1,row2;
+    ROW_COL rc1,rc2,rc3,rc4,rc;
 
-    row1.entries = {{0,11},{2,22}};
-    row2.entries = {{0,33}};
+    rc1.entries.insert({{0,0},1});
+    rc2.entries.insert({{1,1},1});
+    rc3.entries.insert({{1,0},1});
+    rc4.entries.insert({{0,0},9});
+    rc = rc1 - rc2 + rc3 - rc4;
 
-    M.add_row(row1);
-    M.add_row(row2);
-
+    M.add_row_col(rc);
     M.csc_generate(M_x,M_nnz,M_i,M_p);
-
-    std::cout << "M_nnz: " << M_nnz << std::endl;
-
-    std::cout << "M_x: ";
-    for (int i = 0; i < M_nnz; i++){
-        std::cout << M_x[i] << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "M_i: ";
-    for (int i = 0; i < M_nnz; i++){
-        std::cout << M_i[i] << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "M_p: ";
-    for (int i = 0; i < num_cols+1; i++){
-        std::cout << M_p[i] << " ";
-    }
-    std::cout << std::endl;
+    M.print_matrix();
+    
 
     return 0;
 }

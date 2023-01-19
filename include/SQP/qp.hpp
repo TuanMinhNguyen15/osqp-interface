@@ -21,8 +21,8 @@ struct PARAM_DUMMY{
     PARAM_DUMMY operator -();
 };
 
-PARAM_DUMMY operator * (c_float coef, PARAM_DUMMY &param_dummy);
-ROW operator * (PARAM_DUMMY param_dummy, ROW &row);
+PARAM_DUMMY operator * (c_float coef, PARAM_DUMMY param_dummy);
+ROW operator * (PARAM_DUMMY param_dummy, ROW row);
 
 struct Expression{
     ROW linear_terms;
@@ -39,7 +39,7 @@ Expression operator + (Expression exp1, Expression exp2);
 Expression operator - (Expression exp1, Expression exp2);
 Expression operator * (float coef, Expression exp);
 Expression operator * (Expression exp1, Expression exp2); // quadraic term!!!
-Expression operator * (PARAM_DUMMY param_dummy, Expression &exp);
+Expression operator * (PARAM_DUMMY param_dummy, Expression exp);
 
 
 class QP {

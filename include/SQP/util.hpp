@@ -18,19 +18,16 @@ ROW operator + (ROW row_a, ROW row_b);
 ROW operator - (ROW row_a, ROW row_b);
 ROW operator * (float coeff, ROW row);
 
-struct SYM_M {
-    // matrix_info
-    // [col0 , col1 , col2 ...]
-    // [<row,data> , s<row,data> , <row,data> ... ]
-    std::map<int,ROW> matrix_info;
-
-    SYM_M(int dim){
-        matrix_info.clear();
-        for (int i = 0; i < dim; i++){
-            matrix_info.insert({i,ROW()});
-        }
+struct ROW_COL {
+    std::map<std::pair<int,int>,c_float> entries;
+    ROW_COL(){
+        entries.clear();
     }
 };
+
+ROW_COL operator + (ROW_COL rc_a, ROW_COL rc_b);
+ROW_COL operator - (ROW_COL rc_a, ROW_COL rc_b);
+ROW_COL operator * (c_float coeff, ROW_COL rc);
 
 class CSC_GEN{
     public:
@@ -38,6 +35,7 @@ class CSC_GEN{
         CSC_GEN();
 
         void add_row(ROW row);
+        void add_row_col(ROW_COL rc);
         void update_num_cols(int num_cols);
         void csc_generate(c_float *&M_x, c_int &M_nnz, c_int *&M_i, c_int *&M_p);
         void print_matrix();
