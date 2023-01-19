@@ -10,8 +10,8 @@ int main(){
     qp_params.params = {&p};
     QP qp(qp_params);
 
-    qp.add_constraint(0 , x[0] + x[1] + x[2] , 1);
-    qp.add_constraint(p[0], p[0]*x[0] - p[1]*x[1] + p[2]*x[2], p[2]);
+    qp.add_constraint(p[0] , -x[0] + x[1] + x[2] , 1);
+    qp.add_constraint(-100, -p[0]*x[0]  - 2*p[1]*x[1] - 4*x[1] - p[2]*x[2], -p[2]);
     qp.formulate();
 
     p.update_data({-11,-22,-33});

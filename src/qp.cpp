@@ -22,6 +22,7 @@ QP::Parameter::Parameter(int size){
      types.resize(size);
      var_indices.resize(size);
      constr_indices.resize(size);
+     scales.resize(size);
      targets.resize(size);
 }
 
@@ -61,6 +62,22 @@ ROW operator * (PARAM_DUMMY param_dummy, ROW &row){
      return row;
 }
 
+PARAM_DUMMY PARAM_DUMMY::operator-(){
+     PARAM_DUMMY param_dummy;
+     param_dummy.param_ptr = param_ptr;
+     param_dummy.index = index;
+     param_dummy.var_index = var_index;
+     param_dummy.scale *= -1;
+
+     return param_dummy;
+}
+
+PARAM_DUMMY operator * (c_float coef, PARAM_DUMMY &param_dummy){
+     param_dummy.scale = coef;
+     
+     return param_dummy;
+}
+
 // ---------- Expression ----------
 Expression::Expression(){
      param_dummies.clear();
@@ -89,9 +106,27 @@ Expression operator - (Expression exp1, Expression exp2){
 
      // Quadratic terms
 
+     // Scaling
+     if (exp2.param_dummies.size() == 1){
+          exp2.param_dummies[0].scale *= -1;
+     }
+
      // Params
      exp_out.param_dummies.insert(exp_out.param_dummies.end(),exp1.param_dummies.begin(),exp1.param_dummies.end());
      exp_out.param_dummies.insert(exp_out.param_dummies.end(),exp2.param_dummies.begin(),exp2.param_dummies.end());
+
+     return exp_out;
+}
+
+Expression Expression::operator-(){
+     Expression exp_out;
+     exp_out.linear_terms = linear_terms;
+     exp_out.param_dummies = param_dummies;
+
+     // Linear terms
+     for (auto &linear_term : exp_out.linear_terms.entries){
+          linear_term.second *= -1;
+     }
 
      return exp_out;
 }
@@ -150,6 +185,7 @@ void QP::add_constraint(c_float lb, Expression exp, c_float ub){
           param_ptr->types[param_dummy.index].push_back(TYPE::CONSTRAINT);
           param_ptr->var_indices[param_dummy.index].push_back(param_dummy.var_index); 
           param_ptr->constr_indices[param_dummy.index].push_back(num_constr);
+          param_ptr->scales[param_dummy.index].push_back(param_dummy.scale);
      }
 
      num_constr++;
@@ -164,12 +200,14 @@ void QP::add_constraint(PARAM_DUMMY lb, Expression exp, c_float ub){
      param_ptr->constr_indices[lb.index].push_back(num_constr);
      param_ptr->var_indices[lb.index].push_back(-1);
      param_ptr->types[lb.index].push_back(TYPE::LOWER_BOUND);
+     param_ptr->scales[lb.index].push_back(lb.scale);
 
      for (auto param_dummy : exp.param_dummies){
           auto param_ptr = static_cast<QP::Parameter*>(param_dummy.param_ptr);
           param_ptr->types[param_dummy.index].push_back(TYPE::CONSTRAINT);
           param_ptr->var_indices[param_dummy.index].push_back(param_dummy.var_index); 
           param_ptr->constr_indices[param_dummy.index].push_back(num_constr);
+          param_ptr->scales[param_dummy.index].push_back(param_dummy.scale);
      }
 
      num_constr++;
@@ -185,12 +223,14 @@ void QP::add_constraint(c_float lb, Expression exp, PARAM_DUMMY ub){
      param_ptr->constr_indices[ub.index].push_back(num_constr);
      param_ptr->var_indices[ub.index].push_back(-1);
      param_ptr->types[ub.index].push_back(TYPE::UPPER_BOUND);
+     param_ptr->scales[ub.index].push_back(ub.scale);
 
      for (auto param_dummy : exp.param_dummies){
           auto param_ptr = static_cast<QP::Parameter*>(param_dummy.param_ptr);
           param_ptr->types[param_dummy.index].push_back(TYPE::CONSTRAINT);
           param_ptr->var_indices[param_dummy.index].push_back(param_dummy.var_index); 
           param_ptr->constr_indices[param_dummy.index].push_back(num_constr);
+          param_ptr->scales[param_dummy.index].push_back(param_dummy.scale);
      }
 
      num_constr++;
@@ -205,17 +245,20 @@ void QP::add_constraint(PARAM_DUMMY lb, Expression exp, PARAM_DUMMY ub){
      lb_param_ptr->constr_indices[lb.index].push_back(num_constr);
      lb_param_ptr->var_indices[lb.index].push_back(-1);
      lb_param_ptr->types[lb.index].push_back(TYPE::LOWER_BOUND);
+     lb_param_ptr->scales[lb.index].push_back(lb.scale);
 
      QP::Parameter *ub_param_ptr = static_cast<QP::Parameter*>(ub.param_ptr);
      ub_param_ptr->constr_indices[ub.index].push_back(num_constr);
      ub_param_ptr->var_indices[ub.index].push_back(-1);
      ub_param_ptr->types[ub.index].push_back(TYPE::UPPER_BOUND);
+     ub_param_ptr->scales[ub.index].push_back(ub.scale);
 
      for (auto param_dummy : exp.param_dummies){
           auto param_ptr = static_cast<QP::Parameter*>(param_dummy.param_ptr);
           param_ptr->types[param_dummy.index].push_back(TYPE::CONSTRAINT);
           param_ptr->var_indices[param_dummy.index].push_back(param_dummy.var_index); 
           param_ptr->constr_indices[param_dummy.index].push_back(num_constr);
+          param_ptr->scales[param_dummy.index].push_back(param_dummy.scale);
      }
 
      num_constr++;
@@ -325,8 +368,12 @@ void QP::update(){
 
      for (auto param : qp_params_.params){
           for (int data_index = 0; data_index < param->data.size(); data_index++){
-               for (auto target : param->targets[data_index]){
-                    target.first[target.second] += param->data[data_index];
+               // for (auto target : param->targets[data_index]){
+               //      target.first[target.second] += param->data[data_index];
+               // }
+
+               for (auto target_index = 0; target_index < param->targets[data_index].size(); target_index++){
+                    param->targets[data_index][target_index].first[param->targets[data_index][target_index].second] += param->data[data_index]*param->scales[data_index][target_index];
                }
           }
      }

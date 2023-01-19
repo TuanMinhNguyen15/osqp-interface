@@ -16,8 +16,12 @@ struct PARAM_DUMMY{
     void* param_ptr;
     int index;
     int var_index;
+    c_float scale = 1;
+
+    PARAM_DUMMY operator -();
 };
 
+PARAM_DUMMY operator * (c_float coef, PARAM_DUMMY &param_dummy);
 ROW operator * (PARAM_DUMMY param_dummy, ROW &row);
 
 struct Expression{
@@ -27,6 +31,8 @@ struct Expression{
     std::vector<PARAM_DUMMY> param_dummies;
 
     Expression();
+
+    Expression operator - ();
 };
 
 Expression operator + (Expression exp1, Expression exp2);
@@ -62,7 +68,8 @@ class QP {
             std::set<char> avail_types = {'P','q','l','A','u'};
             
             std::vector<c_float> data;
-            std::vector<std::vector<int>> var_indices,constr_indices;  // Book Kepping
+            std::vector<std::vector<int>> var_indices,constr_indices;  
+            std::vector<std::vector<c_float>> scales;
             std::vector<std::vector<TYPE>> types;
             // std::vector<std::vector<int>> target_indices;  // Important!
             // c_float *target;
