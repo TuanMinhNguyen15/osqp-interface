@@ -45,10 +45,19 @@ int main() {
     }
 
     // Setup workspace
+    settings->verbose = 0;
     exitflag = osqp_setup(&work, data, settings);
 
     // Solve Problem
     osqp_solve(work);
+
+    std::cout << "solution x: ";
+    for (int i = 0 ; i < n ; i++){
+        std::cout << work->solution->x[i] << " , ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "Objective Value: " << work->info->obj_val << std::endl;
 
     // Cleanup
     osqp_cleanup(work);

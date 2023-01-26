@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\CMakeFiles\3.24.3\x64\Debug\VCTargetsPath</FullPath>
+      <FullPath>D:\osqp-interface\build\CMakeFiles\3.24.3\x64\Debug\VCTargetsPath</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

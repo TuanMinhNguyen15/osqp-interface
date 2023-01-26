@@ -1,4 +1,4 @@
-#include "SQP/util.hpp"
+#include "osqp-interface/util.hpp"
 
 // CSC_GEN
 CSC_GEN::CSC_GEN(int num_cols):num_cols(num_cols){
@@ -182,7 +182,7 @@ ROW_COL operator - (ROW_COL rc_a, ROW_COL rc_b){
 
 ROW_COL operator * (c_float coeff, ROW_COL rc){
     for (auto &rc_entry : rc.entries){
-        rc_entry.second *= coeff;
+        rc_entry.second = coeff;
     }
 
     return rc;

@@ -1,6 +1,6 @@
-^D:\SEQUENTIALQUADRATICPROGRAM\BUILD\CMAKEFILES\A92DB47B2613BE0B815BAF1933AE41F6\GENERATE.STAMP.RULE
+^D:\OSQP-INTERFACE\BUILD\CMAKEFILES\E0C5A6CF0224291F9380757FE0B5FB88\GENERATE.STAMP.RULE
 setlocal
-E:\CMake\bin\cmake.exe -SD:/SequentialQuadraticProgram -BD:/SequentialQuadraticProgram/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/SequentialQuadraticProgram/build/SequentialQuadraticProgram.sln
+E:\CMake\bin\cmake.exe -SD:/osqp-interface -BD:/osqp-interface/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/osqp-interface/build/SequentialQuadraticProgram.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

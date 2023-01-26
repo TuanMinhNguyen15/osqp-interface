@@ -2,19 +2,16 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>D:\osqp-interface\build\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\Debug\csc_gen_demo.exe</FullPath>
+      <FullPath>D:\osqp-interface\build\Debug\qp_demo.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\Debug\qp_demo.exe</FullPath>
+      <FullPath>D:\osqp-interface\build\Debug\test.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\Debug\test.exe</FullPath>
-    </ProjectOutput>
-    <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\x64\Debug\ALL_BUILD</FullPath>
+      <FullPath>D:\osqp-interface\build\x64\Debug\ALL_BUILD</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

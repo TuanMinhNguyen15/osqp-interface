@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>D:\osqp-interface\build\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\SequentialQuadraticProgram\build\Debug\test.exe</FullPath>
+      <FullPath>D:\osqp-interface\build\Debug\test.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
