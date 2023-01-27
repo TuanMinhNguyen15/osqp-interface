@@ -94,6 +94,10 @@ void CSC_GEN::restore(){
     csc_x = csc_x_original;
 }
 
+c_int CSC_GEN::get_nnz(){
+    return csc_nnz;
+}
+
 // ROW 
 
 ROW operator + (ROW row_a, ROW row_b){

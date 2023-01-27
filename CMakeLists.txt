@@ -16,5 +16,8 @@ target_include_directories(osqp_interface PUBLIC
 
 
 
-add_executable(qp_demo ./examples/qp_demo.cpp)
-target_link_libraries(qp_demo PRIVATE osqp_interface)
+add_executable(demo1 ./examples/demo1.cpp)
+target_link_libraries(demo1 PRIVATE osqp_interface)
+
+add_executable(demo2 ./examples/demo2.cpp)
+target_link_libraries(demo2 PRIVATE osqp_interface)

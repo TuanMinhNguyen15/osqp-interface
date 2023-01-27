@@ -59,7 +59,7 @@ class QP {
         struct Parameter{
             // public
             Parameter(int size);
-            void update_data(std::vector<c_float> data_new);
+            void set_data(std::vector<c_float> data_new);
             PARAM_DUMMY operator [] (int index);
 
             // private
@@ -117,7 +117,7 @@ class QP {
         CSC_GEN A_matrix;
 
         std::vector<c_float> l_vec,u_vec,q_vec;
-        std::vector<c_float> l_original,u_original;
+        std::vector<c_float> l_original,u_original,q_original;
 
         // OSQP variables
         OSQPWorkspace *work;

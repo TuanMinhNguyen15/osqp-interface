@@ -5,7 +5,10 @@
       <FullPath>D:\osqp-interface\build\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\osqp-interface\build\Debug\qp_demo.exe</FullPath>
+      <FullPath>D:\osqp-interface\build\Debug\demo1.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\osqp-interface\build\Debug\demo2.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
       <FullPath>D:\osqp-interface\build\Debug\test.exe</FullPath>

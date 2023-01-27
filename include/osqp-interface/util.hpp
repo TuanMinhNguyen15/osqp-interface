@@ -40,6 +40,7 @@ class CSC_GEN{
         void csc_generate(c_float *&M_x, c_int &M_nnz, c_int *&M_i, c_int *&M_p);
         void print_matrix();
         void restore();
+        c_int get_nnz();
 
     private:
         // num_cols <=> number of variables

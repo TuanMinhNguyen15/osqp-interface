@@ -27,7 +27,7 @@ QP::Parameter::Parameter(int size){
      targets.resize(size);
 }
 
-void QP::Parameter::update_data(std::vector<c_float> data_new){
+void QP::Parameter::set_data(std::vector<c_float> data_new){
      if (data_new.size() == size){
           data = data_new;
      }
@@ -383,6 +383,7 @@ void QP::formulate(){
           }
      }
      q = &q_vec[0];
+     q_original = q_vec;
 
      // Constraints
      if (num_constr == 0){
@@ -392,6 +393,8 @@ void QP::formulate(){
      A_matrix.csc_generate(A_x,A_nnz,A_i,A_p);
      l = &l_vec[0];
      u = &u_vec[0];
+     l_original = l_vec;
+     u_original = u_vec;
 
      // Parameters
      for (auto param : qp_params_.params){
@@ -449,6 +452,8 @@ void QP::formulate(){
 }
 
 void QP::update(){
+     P_matrix.restore();
+     q_vec = q_original;
      A_matrix.restore();
      l_vec = l_original;
      u_vec = u_original;
@@ -460,6 +465,12 @@ void QP::update(){
                }
           }
      }
+
+     osqp_update_P(work, P_x, OSQP_NULL, P_matrix.get_nnz());
+     osqp_update_A(work, A_x, OSQP_NULL, A_matrix.get_nnz());
+     osqp_update_lin_cost(work,q);
+     osqp_update_bounds(work,l,u);
+     
 }
 
 void QP::solve(){
