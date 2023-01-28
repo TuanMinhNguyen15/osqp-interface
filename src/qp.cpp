@@ -449,6 +449,7 @@ void QP::formulate(){
      data->u = u;
 
      osqp_setup(&work, data, settings);
+     update();
 }
 
 void QP::update(){

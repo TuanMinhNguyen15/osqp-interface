@@ -9,7 +9,6 @@ int main(){
     QP::QP_Params qp_params;
     qp_params.vars = {&x};
     QP qp(qp_params);
-    qp.get_settings()->verbose = 0; 
 
     // add objective function
     qp.add_cost(2*x[0]*x[0] + x[1]*x[1] + x[0]*x[1] + x[0] + x[1]); 
