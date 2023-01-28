@@ -1,0 +1,5 @@
+D:/cmake_installs/osqp-interface/lib/osqp_interface.lib
+D:/cmake_installs/osqp-interface/include/osqp-interface/qp.hpp
+D:/cmake_installs/osqp-interface/include/osqp-interface/util.hpp
+D:/cmake_installs/osqp-interface/cmake/osqp_interface-config.cmake
+D:/cmake_installs/osqp-interface/cmake/osqp_interface-config-debug.cmake

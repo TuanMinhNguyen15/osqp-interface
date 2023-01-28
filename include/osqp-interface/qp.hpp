@@ -45,37 +45,37 @@ Expression operator * (PARAM_DUMMY param_dummy, Expression exp);
 
 class QP {
     public:
-        struct Variable{
-            // public
-            Variable(int size);
-            std::vector<c_float> solution;
-            Expression operator [] (int index);
+        class Variable{
+            public:
+                Variable(int size);
+                std::vector<c_float> solution;
+                Expression operator [] (int index);
 
-            // private
-            int col_start = -1;
-            int size;
+            private:
+                int col_start = -1;
+                int size;
+                friend class QP;
         };
         
-        struct Parameter{
-            // public
-            Parameter(int size);
-            void set_data(std::vector<c_float> data_new);
-            PARAM_DUMMY operator [] (int index);
+        class Parameter{
+            public:
+                Parameter(int size);
+                void set_data(std::vector<c_float> data_new);
+                PARAM_DUMMY operator [] (int index);
 
-            // private
-            int size;
-            QP *qp;
-            char type; 
-            std::set<char> avail_types = {'P','q','l','A','u'};
-            
-            std::vector<c_float> data;
-            std::vector<std::vector<int>> var_indices,var_indices2,constr_indices;  
-            std::vector<std::vector<c_float>> scales;
-            std::vector<std::vector<TYPE>> types;
-            // std::vector<std::vector<int>> target_indices;  // Important!
-            // c_float *target;
+            private:
+                int size;
+                QP *qp;
+                char type; 
+                std::set<char> avail_types = {'P','q','l','A','u'};
+                
+                std::vector<c_float> data;
+                std::vector<std::vector<int>> var_indices,var_indices2,constr_indices;  
+                std::vector<std::vector<c_float>> scales;
+                std::vector<std::vector<TYPE>> types;
+                std::vector< std::vector< std::pair<c_float*,int>>> targets;
 
-            std::vector< std::vector< std::pair<c_float*,int>>> targets;
+                friend class QP;
         };
 
         struct QP_Params{

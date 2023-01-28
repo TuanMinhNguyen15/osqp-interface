@@ -1,0 +1,10 @@
+^D:\OSQP-INTERFACE\BUILD\CMAKEFILES\E0C5A6CF0224291F9380757FE0B5FB88\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

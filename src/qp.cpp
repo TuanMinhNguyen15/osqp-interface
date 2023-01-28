@@ -45,24 +45,6 @@ PARAM_DUMMY QP::Parameter::operator[] (int index){
   
 }
 
-ROW operator * (PARAM_DUMMY param_dummy, ROW row){
-     // TODO: * operator only works on type 'A' parameters
-     if (row.entries.size() == 1){
-          auto entry_ptr = row.entries.begin(); 
-          auto param_ptr = static_cast<QP::Parameter*>(param_dummy.param_ptr);
-
-          entry_ptr->second = 0;
-          param_ptr->var_indices[param_dummy.index].push_back(entry_ptr->first);
-          param_ptr->constr_indices[param_dummy.index].push_back(param_ptr->qp->get_num_constr());
-          
-     }
-     else{
-          std::cerr << "row must have only one element!\n";
-     }
-
-     return row;
-}
-
 PARAM_DUMMY PARAM_DUMMY::operator-(){
      PARAM_DUMMY param_dummy;
      param_dummy.param_ptr = param_ptr;

@@ -10,6 +10,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxp
 		{1C28E2BB-32F6-3126-B036-C962B273265A} = {1C28E2BB-32F6-3126-B036-C962B273265A}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "INSTALL", "INSTALL.vcxproj", "{8FEEAF01-21B5-3CCC-B560-69B06082217B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6AAA7020-F0A3-3F80-883A-36C371C71488} = {6AAA7020-F0A3-3F80-883A-36C371C71488}
+		{AA9E3BC1-5DAF-35E8-8EC4-94857E49174B} = {AA9E3BC1-5DAF-35E8-8EC4-94857E49174B}
+	EndProjectSection
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "ZERO_CHECK.vcxproj", "{AA9E3BC1-5DAF-35E8-8EC4-94857E49174B}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -45,9 +51,17 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6AAA7020-F0A3-3F80-883A-36C371C71488}.Debug|x64.ActiveCfg = Debug|x64
+		{6AAA7020-F0A3-3F80-883A-36C371C71488}.Debug|x64.Build.0 = Debug|x64
 		{6AAA7020-F0A3-3F80-883A-36C371C71488}.Release|x64.ActiveCfg = Release|x64
+		{6AAA7020-F0A3-3F80-883A-36C371C71488}.Release|x64.Build.0 = Release|x64
 		{6AAA7020-F0A3-3F80-883A-36C371C71488}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{6AAA7020-F0A3-3F80-883A-36C371C71488}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
 		{6AAA7020-F0A3-3F80-883A-36C371C71488}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+		{6AAA7020-F0A3-3F80-883A-36C371C71488}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
+		{8FEEAF01-21B5-3CCC-B560-69B06082217B}.Debug|x64.ActiveCfg = Debug|x64
+		{8FEEAF01-21B5-3CCC-B560-69B06082217B}.Release|x64.ActiveCfg = Release|x64
+		{8FEEAF01-21B5-3CCC-B560-69B06082217B}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{8FEEAF01-21B5-3CCC-B560-69B06082217B}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
 		{AA9E3BC1-5DAF-35E8-8EC4-94857E49174B}.Debug|x64.ActiveCfg = Debug|x64
 		{AA9E3BC1-5DAF-35E8-8EC4-94857E49174B}.Debug|x64.Build.0 = Debug|x64
 		{AA9E3BC1-5DAF-35E8-8EC4-94857E49174B}.Release|x64.ActiveCfg = Release|x64
@@ -90,7 +104,7 @@ Global
 		{1C28E2BB-32F6-3126-B036-C962B273265A}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CC1301D6-779F-3B2B-BBE5-37F30E6E8140}
+		SolutionGuid = {F5AAE7D4-5DFA-3AF5-921E-521DE4C31839}
 	EndGlobalSection
 	GlobalSection(ExtensibilityAddIns) = postSolution
 	EndGlobalSection

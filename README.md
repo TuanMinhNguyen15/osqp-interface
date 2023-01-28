@@ -1,4 +1,4 @@
-# C++ Interface for OSQP Solver
+# C++ Interface for OSQP solver
 
 The purpose of this project is to create an intuitive c++ interface for the [osqp](https://osqp.org/docs/index.html) solver. Inspired by the convenience of [cvxpy](https://www.cvxpy.org/), the interface supports both high-level problem formulation and parameterization.
 
