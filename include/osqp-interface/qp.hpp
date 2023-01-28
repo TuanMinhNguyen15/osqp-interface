@@ -84,6 +84,7 @@ class QP {
         };
 
         QP(QP_Params qp_params);
+        ~QP();
 
         void add_constraint(c_float     lb, Expression exp, c_float     ub);
         void add_constraint(PARAM_DUMMY lb, Expression exp, c_float     ub);

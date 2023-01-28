@@ -238,6 +238,16 @@ QP::QP(QP_Params qp_params):qp_params_(qp_params){
      cost.param_dummies.clear();
 }
 
+QP::~QP(){
+     osqp_cleanup(work);
+     if (data) {
+          if (data->A) c_free(data->A);
+          if (data->P) c_free(data->P);
+          c_free(data);
+     }
+     if (settings) c_free(settings);
+}
+
 void QP::add_constraint(c_float lb, Expression exp, c_float ub){
      l_vec.push_back(lb);
      A_matrix.add_row(exp.linear_terms);
