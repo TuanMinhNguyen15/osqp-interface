@@ -395,19 +395,16 @@ void QP::formulate(){
                for (int j = 0; j < param->types[i].size(); j++){
                     switch (param->types[i][j]){
                          case TYPE::LOWER_BOUND:
-                              std::cout << "Lower bound detected\n";
                               param->targets[i][j].first  = l;
                               param->targets[i][j].second = param->constr_indices[i][j];
                               break;
 
                          case TYPE::UPPER_BOUND:
-                              std::cout << "Upper bound detected\n";
                               param->targets[i][j].first  = u;
                               param->targets[i][j].second = param->constr_indices[i][j];
                               break;
 
                          case TYPE::CONSTRAINT:
-                              std::cout << "Constraint detected \n";
                               param->targets[i][j].first  = A_x;
                               param->targets[i][j].second = A_p[param->var_indices[i][j]] + param->constr_indices[i][j];
                               break;
