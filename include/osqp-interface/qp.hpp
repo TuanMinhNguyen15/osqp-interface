@@ -47,7 +47,9 @@ class QP {
     public:
         class Variable{
             public:
+                Variable();
                 Variable(int size);
+                void update_size(int size);
                 std::vector<c_float> solution;
                 Expression operator [] (int index);
 
@@ -59,16 +61,16 @@ class QP {
         
         class Parameter{
             public:
+                Parameter();
                 Parameter(int size);
+                void update_size(int size);
                 void set_data(std::vector<c_float> data_new);
                 PARAM_DUMMY operator [] (int index);
 
             private:
                 int size;
                 QP *qp;
-                char type; 
-                std::set<char> avail_types = {'P','q','l','A','u'};
-                
+    
                 std::vector<c_float> data;
                 std::vector<std::vector<int>> var_indices,var_indices2,constr_indices;  
                 std::vector<std::vector<c_float>> scales;
@@ -83,8 +85,10 @@ class QP {
             std::vector<Parameter*> params;
         };
 
+        QP();
         QP(QP_Params qp_params);
         ~QP();
+        void update_qp_params(QP_Params qp_params);
 
         void add_constraint(c_float     lb, Expression exp, c_float     ub);
         void add_constraint(PARAM_DUMMY lb, Expression exp, c_float     ub);
@@ -142,5 +146,9 @@ class QP {
 
         // l & u vectors
         c_float *l,*u;
+
+        // status
+        bool is_setup = false;
+        bool is_formulated = false;
 
 };

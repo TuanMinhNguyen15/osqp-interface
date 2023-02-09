@@ -4,8 +4,6 @@ project(OSQP_INTERFACE)
 find_package(osqp REQUIRED
              PATHS "D:\\osqp\\install\\")
 
-add_executable(test ./test.cpp)
-target_link_libraries(test PRIVATE osqp::osqp)
 
 # Create static library
 add_library(osqp_interface STATIC ./src/util.cpp

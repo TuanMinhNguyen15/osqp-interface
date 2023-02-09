@@ -1,4 +1,3 @@
-D:/osqp-interface/build/CMakeFiles/test.dir
 D:/osqp-interface/build/CMakeFiles/osqp_interface.dir
 D:/osqp-interface/build/CMakeFiles/demo1.dir
 D:/osqp-interface/build/CMakeFiles/demo2.dir

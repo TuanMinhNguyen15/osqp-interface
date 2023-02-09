@@ -1,9 +1,15 @@
 #include "osqp-interface/qp.hpp"
 
 // ---------- Variable ----------
+QP::Variable::Variable():size(0){}
 
 QP::Variable::Variable(int size):size(size){
      solution.resize(size);
+}
+
+void QP::Variable::update_size(int size){
+     Variable var(size);
+     *this = var;
 }
 
 Expression QP::Variable::operator[] (int index){
@@ -15,9 +21,9 @@ Expression QP::Variable::operator[] (int index){
 }
 
 // ---------- Parameter ----------
+QP::Parameter::Parameter():size(0){}
 
-QP::Parameter::Parameter(int size){
-     this->size = size;
+QP::Parameter::Parameter(int size):size(size){
      data.resize(size,0);
      types.resize(size);
      var_indices.resize(size);
@@ -25,6 +31,11 @@ QP::Parameter::Parameter(int size){
      constr_indices.resize(size);
      scales.resize(size);
      targets.resize(size);
+}
+
+void QP::Parameter::update_size(int size){
+     Parameter param(size);
+     *this = param;
 }
 
 void QP::Parameter::set_data(std::vector<c_float> data_new){
@@ -192,45 +203,80 @@ Expression operator * (Expression exp1, Expression exp2){
 
 
 // ---------- QP ----------
+QP::QP(){}
 
 QP::QP(QP_Params qp_params):qp_params_(qp_params){
+     bool is_zero_size = false;
+     bool is_no_variable = true;
+     // variables
      for (auto var : qp_params_.vars){
-       if (num_vars == 0){
-            var->col_start = 0;  
-       }
-       else{
-            var->col_start = num_vars;
-       }
-       num_vars += var->size;
+          is_no_variable = false;
+          if (var->size == 0){
+               is_zero_size = true;
+               break;
+          }
+
+          if (num_vars == 0){
+               var->col_start = 0;  
+          }
+          else{
+               var->col_start = num_vars;
+          }
+          num_vars += var->size;
      }
 
+     // parameters
      for (auto param : qp_params_.params){
+          if (param->size == 0){
+               is_zero_size = true;
+               break;
+          }
+
           param->qp = this;
      }
 
-     settings = (OSQPSettings *)c_malloc(sizeof(OSQPSettings));
-     data     = (OSQPData *)c_malloc(sizeof(OSQPData));
-     osqp_set_default_settings(settings);
-     settings->alpha = 1.0; // Change alpha parameter
+     if (is_no_variable || is_zero_size){
+          std::cout << "Error: Either QP problem has no variable or at least one variable/parameter has zero size\n";
+     }
+     else{
+          settings = (OSQPSettings *)c_malloc(sizeof(OSQPSettings));
+          data     = (OSQPData *)c_malloc(sizeof(OSQPData));
+          osqp_set_default_settings(settings);
+          settings->alpha = 1.0; // Change alpha parameter
 
-     A_matrix.update_num_cols(num_vars);
-     P_matrix.update_num_cols(num_vars);
-     cost.linear_terms.entries.clear();
-     cost.quadratic_terms.entries.clear();
-     cost.param_dummies.clear();
+          A_matrix.update_num_cols(num_vars);
+          P_matrix.update_num_cols(num_vars);
+          cost.linear_terms.entries.clear();
+          cost.quadratic_terms.entries.clear();
+          cost.param_dummies.clear();
+
+          is_setup = true;
+     }    
+}
+
+void QP::update_qp_params(QP_Params qp_params){
+     QP qp(qp_params);
+     *this = qp;
 }
 
 QP::~QP(){
-     osqp_cleanup(work);
-     if (data) {
-          if (data->A) c_free(data->A);
-          if (data->P) c_free(data->P);
-          c_free(data);
+     if (is_formulated){
+          osqp_cleanup(work);
+          if (data) {
+               if (data->A) c_free(data->A);
+               if (data->P) c_free(data->P);
+               c_free(data);
+          }
+          if (settings) c_free(settings);
      }
-     if (settings) c_free(settings);
 }
 
 void QP::add_constraint(c_float lb, Expression exp, c_float ub){
+     if (!is_setup){
+          std::cout << "Error: QP problem needs to be setup first before adding constraints\n";
+          return;
+     }
+
      l_vec.push_back(lb);
      A_matrix.add_row(exp.linear_terms);
      u_vec.push_back(ub);
@@ -248,6 +294,11 @@ void QP::add_constraint(c_float lb, Expression exp, c_float ub){
 }
 
 void QP::add_constraint(PARAM_DUMMY lb, Expression exp, c_float ub){
+     if (!is_setup){
+          std::cout << "Error: QP problem needs to be setup first before adding constraints\n";
+          return;
+     }
+
      l_vec.push_back(0); // lb.param_data
      A_matrix.add_row(exp.linear_terms);
      u_vec.push_back(ub);
@@ -272,6 +323,11 @@ void QP::add_constraint(PARAM_DUMMY lb, Expression exp, c_float ub){
 }
 
 void QP::add_constraint(c_float lb, Expression exp, PARAM_DUMMY ub){
+     if (!is_setup){
+          std::cout << "Error: QP problem needs to be setup first before adding constraints\n";
+          return;
+     }
+
      l_vec.push_back(lb);
      A_matrix.add_row(exp.linear_terms);
      u_vec.push_back(0);  // ub.param_data
@@ -297,6 +353,11 @@ void QP::add_constraint(c_float lb, Expression exp, PARAM_DUMMY ub){
 }
 
 void QP::add_constraint(PARAM_DUMMY lb, Expression exp, PARAM_DUMMY ub){
+     if (!is_setup){
+          std::cout << "Error: QP problem needs to be setup first before adding constraints\n";
+          return;
+     }
+
      l_vec.push_back(0); // lb.param_data
      A_matrix.add_row(exp.linear_terms);
      u_vec.push_back(0); // ub.param_data
@@ -328,6 +389,11 @@ void QP::add_constraint(PARAM_DUMMY lb, Expression exp, PARAM_DUMMY ub){
 }
 
 void QP::add_cost(Expression exp){
+     if (!is_setup){
+          std::cout << "Error: QP problem needs to be setup first before adding costs\n";
+          return;
+     }
+
      cost = cost + exp;
 
      for (auto param_dummy : exp.param_dummies){
@@ -353,6 +419,12 @@ void QP::add_cost(Expression exp){
 }
 
 void QP::formulate(){
+     // check for setup
+     if (!is_setup){
+          std::cout << "Error: QP problem needs to be setup first before being formulated\n";
+          return;
+     }
+
      // Objective Cost
           // Quadratic Cost
      if (cost.quadratic_terms.entries.size() == 0){
@@ -438,10 +510,16 @@ void QP::formulate(){
      data->u = u;
 
      osqp_setup(&work, data, settings);
+     is_formulated = true;
      update();
 }
 
 void QP::update(){
+     if (!is_formulated){
+          std::cout << "Error: QP problem needs to be formulated first before being updated\n";
+          return;
+     }
+
      P_matrix.restore();
      q_vec = q_original;
      A_matrix.restore();
@@ -464,8 +542,12 @@ void QP::update(){
 }
 
 void QP::solve(){
-     osqp_solve(work);
+     if (!is_formulated){
+          std::cout << "Error: QP problem needs to be formulated first before being solved\n";
+          return;
+     }
 
+     osqp_solve(work);
      for (auto var : qp_params_.vars){
           for (auto i = var->col_start ; i < var->col_start + var->size ; i++){
                var->solution[i-var->col_start] = work->solution->x[i];
@@ -510,10 +592,19 @@ int QP::get_num_constr(){
 }
 
 c_float QP::get_obj_val(){
+     if (!is_setup){
+          std::cout << "Error: QP problem is NOT formulated\n";
+          return -1;
+     }
+
      return work->info->obj_val;
 }
 
 std::string QP::get_status(){
+     if (!is_setup){
+          return "Error: QP problem is NOT formulated";
+     }
+
      return std::string (work->info->status);
 }
 
