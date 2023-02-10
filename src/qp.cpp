@@ -103,10 +103,6 @@ Expression operator - (Expression exp1, Expression exp2){
      exp_out.quadratic_terms = exp1.quadratic_terms - exp2.quadratic_terms;
 
      // Scaling
-     // if (exp2.param_dummies.size() == 1){
-     //      exp2.param_dummies[0].scale *= -1;
-     // }
-
      for (auto &param_dummy : exp2.param_dummies){
           param_dummy.scale *= -1;
      }
@@ -261,6 +257,7 @@ void QP::update_qp_params(QP_Params qp_params){
 
 QP::~QP(){
      if (is_formulated){
+          std::cout << "I am done\n";
           osqp_cleanup(work);
           if (data) {
                if (data->A) c_free(data->A);
@@ -268,6 +265,8 @@ QP::~QP(){
                c_free(data);
           }
           if (settings) c_free(settings);
+
+          std::cout << "?????!!!!!!????????\n";
      }
 }
 
@@ -525,6 +524,9 @@ void QP::update(){
      A_matrix.restore();
      l_vec = l_original;
      u_vec = u_original;
+     l = &l_vec[0];
+     u = &u_vec[0];
+     q = &q_vec[0];
 
      for (auto param : qp_params_.params){
           for (int data_index = 0; data_index < param->data.size(); data_index++){
