@@ -8,8 +8,8 @@ QP::Variable::Variable(int size):size(size){
 }
 
 void QP::Variable::update_size(int size){
-     Variable var(size);
-     *this = var;
+     this->size = size;
+     solution.resize(size);
 }
 
 Expression QP::Variable::operator[] (int index){
@@ -34,8 +34,15 @@ QP::Parameter::Parameter(int size):size(size){
 }
 
 void QP::Parameter::update_size(int size){
-     Parameter param(size);
-     *this = param;
+     this->size = size;
+
+     data.resize(size,0);
+     types.resize(size);
+     var_indices.resize(size);
+     var_indices2.resize(size);
+     constr_indices.resize(size);
+     scales.resize(size);
+     targets.resize(size);
 }
 
 void QP::Parameter::set_data(std::vector<c_float> data_new){
@@ -238,7 +245,6 @@ QP::QP(QP_Params qp_params):qp_params_(qp_params){
           settings = (OSQPSettings *)c_malloc(sizeof(OSQPSettings));
           data     = (OSQPData *)c_malloc(sizeof(OSQPData));
           osqp_set_default_settings(settings);
-          settings->alpha = 1.0; // Change alpha parameter
 
           A_matrix.update_num_cols(num_vars);
           P_matrix.update_num_cols(num_vars);
@@ -250,14 +256,65 @@ QP::QP(QP_Params qp_params):qp_params_(qp_params){
      }    
 }
 
+
 void QP::update_qp_params(QP_Params qp_params){
-     QP qp(qp_params);
-     *this = qp;
+     if (is_setup){
+          std::cout << "Error: Problem is already setup\n";
+          return;
+     }
+
+     this->qp_params_ = qp_params;
+
+     bool is_zero_size = false;
+     bool is_no_variable = true;
+     // variables
+     for (auto var : qp_params_.vars){
+          is_no_variable = false;
+          if (var->size == 0){
+               is_zero_size = true;
+               break;
+          }
+
+          if (num_vars == 0){
+               var->col_start = 0;  
+          }
+          else{
+               var->col_start = num_vars;
+          }
+          num_vars += var->size;
+     }
+
+     // parameters
+     for (auto param : qp_params_.params){
+          if (param->size == 0){
+               is_zero_size = true;
+               break;
+          }
+
+          param->qp = this;
+     }
+
+     if (is_no_variable || is_zero_size){
+          std::cout << "Error: Either QP problem has no variable or at least one variable/parameter has zero size\n";
+     }
+     else{
+          settings = (OSQPSettings *)c_malloc(sizeof(OSQPSettings));
+          data     = (OSQPData *)c_malloc(sizeof(OSQPData));
+          osqp_set_default_settings(settings);
+          settings->alpha = 1.0; // Change alpha parameter
+
+          A_matrix.update_num_cols(num_vars);
+          P_matrix.update_num_cols(num_vars);
+          cost.linear_terms.entries.clear();
+          cost.quadratic_terms.entries.clear();
+          cost.param_dummies.clear();
+
+          is_setup = true;
+     } 
 }
 
 QP::~QP(){
      if (is_formulated){
-          std::cout << "I am done\n";
           osqp_cleanup(work);
           if (data) {
                if (data->A) c_free(data->A);
@@ -265,8 +322,6 @@ QP::~QP(){
                c_free(data);
           }
           if (settings) c_free(settings);
-
-          std::cout << "?????!!!!!!????????\n";
      }
 }
 

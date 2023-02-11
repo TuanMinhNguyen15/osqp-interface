@@ -125,9 +125,9 @@ class QP {
         std::vector<c_float> l_original,u_original,q_original;
 
         // OSQP variables
-        OSQPWorkspace *work;
-        OSQPSettings  *settings;
-        OSQPData      *data;
+        OSQPWorkspace *work = nullptr;
+        OSQPSettings  *settings = nullptr;
+        OSQPData      *data = nullptr;
 
         // P matrix
         c_float *P_x;
